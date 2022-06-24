@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">CustomKeyboard</string>
+    <string-array name="names">
+        <item>Oliver</item>
+        <item>Jack</item>
+        <item>Harry</item>
+        <item>Jacob</item>
+        <item>Charlie</item>
+        <item>Amelia</item>
+        <item>Olivia</item>
+        <item>Isla</item>
+        <item>Emily</item>
+        <item>Poppy</item>
+        <item>Antonio</item>
+        <item>Manuel</item>
+        <item>Jose</item>
+        <item>Francisco</item>
+        <item>David</item>
+        <item>Maria</item>
+        <item>Carmen</item>
+        <item>Isabel</item>
+        <item>Laura</item>
+        <item>Ana</item>
+        <item>Cristina</item>
+        <item>Markel</item>
+        <item>Jon</item>
+        <item>Julen</item>
+        <item>Aimar</item>
+        <item>Ander</item>
+        <item>Ibai</item>
+        <item>Ane</item>
+        <item>Laia</item>
+        <item>June</item>
+        <item>Irati</item>
+        <item>Nahia</item>
+    </string-array>
 </resources>

@@ -191,6 +191,69 @@ public class CustomKeyboard {
         // Set text on second textView
         if (isNotNull(secondTextView)) secondTextView.setText(textView.getText().toString());
         else keyboardView.findViewById(R.id.textView).setVisibility(View.GONE);
+
+        // Numbers key click event
+        for (Button b : btnNumbers) {
+            b.setOnClickListener(v -> onKeyClick(b.getText().toString().toLowerCase()));
+        }
+
+        // Letters key click event
+        for (Button b : btnLetters) {
+            b.setOnClickListener(v -> onKeyClick(b.getText().toString().toLowerCase()));
+        }
+
+        // On show keyboard
+        keyboardDialog.setOnShowListener(dialog -> {
+            // Set textView as selected
+            textView.setBackgroundResource(R.drawable.box_with_round_selected);
+        });
+
+        keyboardDialog.setOnDismissListener(dialog -> {
+            // Set textView as deselected
+            textView.setBackgroundResource(R.drawable.box_with_round);
+        });
+
+        /////////////
+        // Actions //
+        /////////////
+        // Enter
+        btnEnter.setOnClickListener(v -> {
+            // Dismiss keyboard
+            dismiss();
+        });
+
+        // Delete
+        btnDelete.setOnClickListener(v -> {
+            String txt = textView.getText().toString();
+            if (len(txt) > 0) {
+                textView.setText(txt.substring(0, len(txt) - 1));
+                if (isNotNull(secondTextView))
+                    secondTextView.setText(textView.getText().toString());
+            }
+        });
+
+        // Delete all
+        btnDelete.setOnLongClickListener(v -> {
+            textView.setText("");
+            if (isNotNull(secondTextView))
+                secondTextView.setText(textView.getText().toString());
+            return true;
+        });
+    }
+
+    // On key click
+    private void onKeyClick(String character) {
+        // Calculate new text
+        String txt = textView.getText().toString();
+        if (txt.endsWith(" ") && character.equals("_")) return;
+        else txt += (len(textView.getText().toString()) == 0 ? character.toUpperCase() : character.toLowerCase());
+        txt = txt.replace("_", " ");
+        ////////////////////////////////////////////
+
+        // Set text
+        textView.setText(txt);
+        if (isNotNull(secondTextView))
+            secondTextView.setText(txt);
     }
 
     // Resize keys
@@ -210,12 +273,20 @@ public class CustomKeyboard {
     ///////////
     // UTILS //
     ///////////
+    public int len(String string) {
+        return string != null ? string.length() : 0;
+    }
+
     public boolean isNotNull(Object o) {
         return o != null;
     }
 
     public void show() {
         if (isNotNull(keyboardDialog) && !keyboardDialog.isShowing()) keyboardDialog.show();
+    }
+
+    public void dismiss() {
+        if (isNotNull(keyboardDialog) && keyboardDialog.isShowing()) keyboardDialog.dismiss();
     }
 
     private float getHW(int cols) {
